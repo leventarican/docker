@@ -1,0 +1,93 @@
+= docker, docker-machine and virtualbox
+
+Target: We want to use docker in a virtual machine in order to get rid of overloaded installations.
+
+== virtualbox
+* https://www.virtualbox.org/wiki/Downloads
+* i installed the latest available version 6
+* just install everthing as recommended
+
+== docker-machine
+* pick the latest version from: https://github.com/docker/machine/releases/
+* download and make it executable
+
+[source,]
+----
+$ curl -L https://github.com/docker/machine/releases/download/v0.16.1/docker-machine-Windows-x86_64.exe > "/c/docker/docker-machine.exe" && \
+> chmod +x "/c/docker/docker-machine.exe"
+----
+
+* create a machine
+[source,]
+----
+docker-machine.exe create --driver virtualbox machine0
+----
+* test / list available machines
+[source,]
+----
+$ docker-machine.exe ls
+NAME       ACTIVE   DRIVER       STATE     URL                         SWARM   DOCKER     ERRORS
+machine0   -        virtualbox   Running   tcp://192.168.42.200:1234           v18.09.6
+----
+* when you open virtualbox you will also see that machine is created and running
+
+image::images\virtualbox.png[]
+* in order to connect docker to machine we need to set environment variables
+- see also: https://docs.docker.com/machine/reference/env/
+[source,]
+----
+docker-machine.exe env --shell cmd machine0
+SET DOCKER_TLS_VERIFY=1
+SET DOCKER_HOST=tcp://192.168.42.200:1234
+SET DOCKER_CERT_PATH=C:\Users\<YOURUSER>\.docker\machine\machines\machine0
+SET DOCKER_MACHINE_NAME=machine0
+SET COMPOSE_CONVERT_WINDOWS_PATHS=true
+REM Run this command to configure your shell:
+REM     @FOR /f "tokens=*" %i IN ('docker-machine.exe env --shell cmd machine0') DO @%i
+----
+* next time when open cmd just run the suggested command 
+[source,]
+----
+@FOR /f "tokens=*" %i IN ('docker-machine.exe env --shell cmd machine0') DO @%i
+----
+== docker
+* run docker cli (docker.exe needed)
+[source,]
+----
+docker run busybox echo hello world
+Unable to find image 'busybox:latest' locally
+latest: Pulling from library/busybox
+...
+Status: Downloaded newer image for busybox:latest
+hello world
+----
+== commands
+*run image*
+[source,]
+----
+docker run busybox echo foobar
+foobar
+----
+*Show a list of all containers*
+[source,]
+----
+docker ps -a
+----
+*Delete running container*
+[source,]
+----
+docker.exe rm <container-id>
+----
+*list images*
+[source,]
+----
+docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+busybox             latest              123456789        9 days ago          1.2MB
+----
+*docker-machine start|stop*
+[source,]
+----
+docker-machine stop <machine-name>
+docker-machine start <machine-name>
+----
