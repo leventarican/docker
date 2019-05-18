@@ -18,6 +18,7 @@ $ curl -L https://github.com/docker/machine/releases/download/v0.16.1/docker-mac
 ----
 
 * create a machine
+- https://docs.docker.com/machine/get-started/#create-a-machine
 [source,]
 ----
 docker-machine.exe create --driver virtualbox machine0
@@ -33,7 +34,7 @@ machine0   -        virtualbox   Running   tcp://192.168.42.200:1234           v
 
 image::images\virtualbox.png[]
 * in order to connect docker to machine we need to set environment variables
-- see also: https://docs.docker.com/machine/reference/env/
+- https://docs.docker.com/machine/reference/env/
 [source,]
 ----
 docker-machine.exe env --shell cmd machine0
