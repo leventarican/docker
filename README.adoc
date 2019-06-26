@@ -94,6 +94,9 @@ docker-machine start <machine-name>
 ----
 
 == docker compose
+* same as docker-machine
+* pick the latest version from https://github.com/docker/compose/releases/
+* download and make it executable
 [source,]
 ----
 curl -L https://github.com/docker/compose/releases/download/1.24.1/docker-compose-Windows-x86_64.exe > ./docker-compose.exe && chmod +x ./docker-compose.exe
