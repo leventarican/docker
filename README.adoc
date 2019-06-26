@@ -92,3 +92,9 @@ busybox             latest              123456789        9 days ago          1.2
 docker-machine stop <machine-name>
 docker-machine start <machine-name>
 ----
+
+== docker compose
+[source,]
+----
+curl -L https://github.com/docker/compose/releases/download/1.24.1/docker-compose-Windows-x86_64.exe > ./docker-compose.exe && chmod +x ./docker-compose.exe
+----
