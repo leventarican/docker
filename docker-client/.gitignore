@@ -1,1 +1,7 @@
-**/target
+/*
+
+# whitelist
+!.gitignore
+!README.md
+!src/
+!pom.xml
