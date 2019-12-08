@@ -2,11 +2,25 @@
 
 == if you already configured docker postgres
 * just start / stop the image
-* host:port localhost:5432 with user postgres
 
 ----
 docker start postgres-image
 docker stop postgres-image
+----
+
+* example connection
+
+----
+host: localhost
+port: 5432 
+user: postgres
+database: developer-db
+----
+
+* JDBC URL
+
+----
+jdbc:postgresql://localhost:5432/developer-db
 ----
 
 == full steps
