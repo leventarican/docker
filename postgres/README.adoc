@@ -2,6 +2,7 @@
 
 == if you already configured docker postgres
 * just start / stop the image
+* host:port localhost:5432 with user postgres
 
 ----
 docker start postgres-image
