@@ -7,6 +7,88 @@ Target: We want to use docker in a virtual machine in order to get rid of overlo
 * i installed the latest available version 6
 * just install everthing as recommended
 
+== postgres
+* get latest postgres image
+
+----
+docker pull postgres
+----
+
+* run. 5432 is default postrges port
+* mount a volume for data persistance.
+
+----
+docker run -p 5432:5432 -v $HOME/postgres-docker:/var/lib/postgresql/data --name postgres-image postgres
+----
+
+
+* for log. if you start with detached: docker run -d ...
+
+----
+docker logs postgres-image
+----
+
+* open shell
+
+----
+docker exec -it postgres-image sh
+
+# createdb -U postgres developer-db     // create a database
+----
+
+* connect to database
+
+----
+# psql -U postgres developer-db
+----
+
+* list databases
+
+----
+developer-db=# \l
+                                  List of databases
+     Name     |  Owner   | Encoding |  Collate   |   Ctype    |   Access privileges   
+--------------+----------+----------+------------+------------+-----------------------
+ developer-db | postgres | UTF8     | en_US.utf8 | en_US.utf8 | 
+----
+
+* create table
+
+----
+developer-db=# CREATE TABLE programming_languages (id int, name varchar(80));
+CREATE TABLE
+----
+
+* select table (TAB for auto complete)
+
+----
+developer-db=# select * from programming_languages ;
+ id | name 
+----+------
+(0 rows)
+----
+
+* quit from psql
+
+----
+developer-db-# \q
+----
+
+* exit from shell, stop docker and start again
+
+----
+exit
+docker stop postgres-image
+docker start postgres-image
+----
+
+* clean up everthing
+
+----
+docker rm -f postrges-image
+docker volume rm postgres-docker
+----
+
 == docker-machine
 * pick the latest version from: https://github.com/docker/machine/releases/
 * download and make it executable
@@ -19,11 +101,13 @@ $ curl -L https://github.com/docker/machine/releases/download/v0.16.1/docker-mac
 
 * create a machine
 - https://docs.docker.com/machine/get-started/#create-a-machine
+
 [source,]
 ----
 docker-machine.exe create --driver virtualbox machine0
 ----
 * test / list available machines
+
 [source,]
 ----
 $ docker-machine.exe ls
@@ -35,6 +119,7 @@ machine0   -        virtualbox   Running   tcp://192.168.42.200:1234           v
 image::images\virtualbox.png[]
 * in order to connect docker to machine we need to set environment variables
 - https://docs.docker.com/machine/reference/env/
+
 [source,]
 ----
 docker-machine.exe env --shell cmd machine0
@@ -46,13 +131,17 @@ SET COMPOSE_CONVERT_WINDOWS_PATHS=true
 REM Run this command to configure your shell:
 REM     @FOR /f "tokens=*" %i IN ('docker-machine.exe env --shell cmd machine0') DO @%i
 ----
+
 * next time when open cmd just run the suggested command 
+
 [source,]
 ----
 @FOR /f "tokens=*" %i IN ('docker-machine.exe env --shell cmd machine0') DO @%i
 ----
+
 == docker
 * run docker cli (docker.exe needed)
+
 [source,]
 ----
 docker run busybox echo hello world
@@ -62,31 +151,48 @@ latest: Pulling from library/busybox
 Status: Downloaded newer image for busybox:latest
 hello world
 ----
+
 == commands
 *run image*
+
 [source,]
 ----
 docker run busybox echo foobar
 foobar
 ----
+
 *Show a list of all containers*
+
 [source,]
 ----
 docker ps -a
 ----
+
+*delete / remove image*
+
+----
+docker image rm IMAGE_ID [IMAGE_ID ...]
+e.g. docker image rm aaacccd3047c f73ccdd3047c 
+----
+
 *Delete running container*
+
 [source,]
 ----
-docker.exe rm <container-id>
+docker rm <container-id>
 ----
+
 *list images*
+
 [source,]
 ----
 docker images
 REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
 busybox             latest              123456789        9 days ago          1.2MB
 ----
+
 *docker-machine start|stop*
+
 [source,]
 ----
 docker-machine stop <machine-name>
@@ -95,6 +201,7 @@ docker-machine start <machine-name>
 
 == show environment variables
 * especially DOCKER_HOST and DOCKER_CERT_PATH
+
 [source,]
 ----
 docker-machine env dev
@@ -104,6 +211,7 @@ docker-machine env dev
 * same as docker-machine
 * pick the latest version from https://github.com/docker/compose/releases/
 * download and make it executable
+
 [source,]
 ----
 curl -L https://github.com/docker/compose/releases/download/1.24.1/docker-compose-Windows-x86_64.exe > ./docker-compose.exe && chmod +x ./docker-compose.exe
