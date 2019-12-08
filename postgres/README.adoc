@@ -1,0 +1,92 @@
+= docker postgres
+
+== if you already configured docker postgres
+* just start / stop the image
+
+----
+docker start postgres-image
+docker stop postgres-image
+----
+
+== full steps
+* get latest postgres image
+
+----
+docker pull postgres
+----
+
+* run. 5432 is default postrges port
+* mount a volume for data persistance.
+
+----
+docker run -p 5432:5432 -v $HOME/postgres-docker:/var/lib/postgresql/data --name postgres-image postgres
+----
+
+
+* for log. if you start with detached: docker run -d ...
+
+----
+docker logs postgres-image
+----
+
+* open shell
+
+----
+docker exec -it postgres-image sh
+
+# createdb -U postgres developer-db     // create a database
+----
+
+* connect to database
+
+----
+# psql -U postgres developer-db
+----
+
+* list databases
+
+----
+developer-db=# \l
+                                  List of databases
+     Name     |  Owner   | Encoding |  Collate   |   Ctype    |   Access privileges   
+--------------+----------+----------+------------+------------+-----------------------
+ developer-db | postgres | UTF8     | en_US.utf8 | en_US.utf8 | 
+----
+
+* create table
+
+----
+developer-db=# CREATE TABLE programming_languages (id int, name varchar(80));
+CREATE TABLE
+----
+
+* select table (TAB for auto complete)
+
+----
+developer-db=# select * from programming_languages ;
+ id | name 
+----+------
+(0 rows)
+----
+
+* quit from psql
+
+----
+developer-db-# \q
+----
+
+* exit from shell, stop docker and start again
+
+----
+exit
+docker stop postgres-image
+docker start postgres-image
+----
+
+* clean up everthing
+
+----
+docker rm -f postrges-image
+docker volume rm postgres-docker
+----
+
