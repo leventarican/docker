@@ -1,3 +1,11 @@
+= images
+* payara: payara-dockerfile/
+    * unzip payara.zip, configure (enable secure admin, ...)
+    * build and run it, then access at localhost:8080 or :4848
+* java: java-dockerfile/
+* ubuntu: ubuntu-dockerfile/
+...
+
 = docker, docker-machine and virtualbox
 
 Target: We want to use docker in a virtual machine in order to get rid of overloaded installations.
