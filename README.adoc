@@ -1,10 +1,10 @@
 = images
 * payara: payara-dockerfile/
-** unzip payara.zip, configure (enable secure admin, ...)
-** build and run it, then access at localhost:8080 or :4848
+unzip payara.zip, configure (enable secure admin, ...)
+build and run it, then access at localhost:8080 or :4848
+
 * java: java-dockerfile/
 * ubuntu: ubuntu-dockerfile/
-...
 
 = docker, docker-machine and virtualbox
 
