@@ -1,4 +1,10 @@
 # flask (python) docker container
 * build: `docker build -t leventarican/flask .`
 * run (bind host port): `docker run -p 5000:5000 leventarican/flask`
-* call: `curl -v 0.0.0.0:5000/ping`
+
+## example calls
+```
+curl -v 0.0.0.0:5000/ping
+
+curl localhost:5000/webhook -d '{"user":"foobar", "lang":"python"}' -H "Content-Type: application/json"
+```
