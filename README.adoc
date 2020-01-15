@@ -2,6 +2,8 @@
 
 Target: We want to use docker in a virtual machine in order to get rid of overloaded installations.
 
+image::img\docker.png[]
+
 == virtualbox
 * https://www.virtualbox.org/wiki/Downloads
 * i installed the latest available version 6
@@ -34,7 +36,7 @@ machine0   -        virtualbox   Running   tcp://192.168.42.200:1234           v
 ----
 * when you open virtualbox you will also see that machine is created and running
 
-image::images\virtualbox.png[]
+image::img\virtualbox.png[]
 * in order to connect docker to machine we need to set environment variables
 - https://docs.docker.com/machine/reference/env/
 
