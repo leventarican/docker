@@ -4,6 +4,9 @@ Target: We want to use docker in a virtual machine in order to get rid of overlo
 
 image::img\docker.png[]
 
+== cheatsheet
+* use `--net=host` argument for host ip in container. otherwise the container will have its own ip
+
 == virtualbox
 * https://www.virtualbox.org/wiki/Downloads
 * i installed the latest available version 6
