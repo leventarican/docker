@@ -30,8 +30,7 @@ jdbc:postgresql://localhost:5432/developer-db
 docker pull postgres
 ----
 
-* run. 5432 is default postrges port
-* mount a volume for data persistance.
+* run: 5432 is default postrges port. mount a volume for data persistance.
 
 ----
 docker run -p 5432:5432 -v $HOME/postgres-docker:/var/lib/postgresql/data --name postgres-image postgres
@@ -73,6 +72,17 @@ developer-db=# \l
 ----
 developer-db=# CREATE TABLE programming_languages (id int, name varchar(80));
 CREATE TABLE
+----
+
+* describe a table
+
+----
+developer-db=# \d programming_languages
+              Table "public.programming_languages"
+ Column |         Type          | Collation | Nullable | Default 
+--------+-----------------------+-----------+----------+---------
+ id     | integer               |           |          | 
+ name   | character varying(80) |           |          | 
 ----
 
 * select table (TAB for auto complete)
