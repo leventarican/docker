@@ -23,6 +23,91 @@ database: developer-db
 jdbc:postgresql://localhost:5432/developer-db
 ----
 
+== psql
+* psql is a terminal-based front-end to PostgreSQL.
+* assumption: postgresql is running
+* if you are running postgresql in container then open shell. 
+----
+docker exec -it postgres-image bash
+----
+* change user
+----
+su postgres
+----
+* run psql
+----
+/$ psql
+----
+* create database
+----
+postgres=# create database dev;
+CREATE DATABASE
+----
+* create user
+----
+postgres=# create user dev with password 'dev';
+CREATE ROLE
+----
+* list all databases
+----
+postgres=# \l
+                                  List of databases
+     Name     |  Owner   | Encoding |  Collate   |   Ctype    |   Access privileges   
+--------------+----------+----------+------------+------------+-----------------------
+ dev          | postgres | UTF8     | en_US.utf8 | en_US.utf8 | 
+ developer-db | postgres | UTF8     | en_US.utf8 | en_US.utf8 | 
+ postgres     | postgres | UTF8     | en_US.utf8 | en_US.utf8 | 
+ ...
+----
+* list schema
+----
+postgres=# \dn
+  List of schemas
+  Name  |  Owner   
+--------+----------
+ public | postgres
+(1 row)
+----
+* quit psql
+----
+postgres=# \q
+----
+* connect to database
+----
+postgres=# \c dev dev
+You are now connected to database "dev" as user "dev".
+----
+* create table
+----
+dev=> create table developers (id integer PRIMARY KEY, name varchar(40));
+CREATE TABLE
+----
+* list table
+----
+dev=> \dt
+          List of relations
+ Schema |    Name    | Type  | Owner 
+--------+------------+-------+-------
+ public | developers | table | dev
+(1 row)
+----
+* insert table
+----
+dev=> insert into developers values (0, 'java');
+INSERT 0 1
+----
+* select table
+----
+dev=> select * from developers 
+dev-> ;
+ id |  name  
+----+--------
+  0 | java
+  1 | python
+  2 | cpp
+(3 rows)
+----
+
 == full steps
 * get latest postgres image
 
