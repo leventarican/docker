@@ -5,6 +5,27 @@ public class Main {
         String result = java13Features();
         System.out.println("java13Features: " + result);
         javaLegacy();
+
+        java15();
+    }
+
+    public static void java15() {
+        System.out.println("# java 15 #");
+        String html = """
+        <html>
+            <body>
+                <b>JEP 378</b>
+            </body>
+        </html>
+        """;
+        record Point(int x, int y) {
+            int sum() {
+                return x + y;
+            }
+        }
+        Point p = new Point(1, 2);
+        System.out.println(html);
+        System.out.println("record: " + p.sum());
     }
 
     public static String java13Features() {
