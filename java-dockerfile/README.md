@@ -1,4 +1,4 @@
-# docker and jdk (java 13)
+# docker and jdk
 
 ## use Dockerfile
 * we are using openjdk version 8
@@ -22,8 +22,9 @@ __Run__
     * `--rm Automatically remove the container when it exits`
     * `-v, --volume list Bind mount a volume`
     * `-w, --workdir string                 Working directory inside the container`
+
 ```
-docker run --rm -v "$PWD":/development -w /development openjdk:13 java --enable-preview Main
+docker run --rm -v "$PWD":/development -w /development openjdk:15 java --enable-preview Main
 ```
 
 __Output__
