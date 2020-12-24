@@ -3,6 +3,25 @@
 ## Overview
 ![Docker ecosystem](docker.png)
 
+## Install with snap
+```
+sudo snap install docker
+``` 
+* check status 
+```
+$ sudo snap services 
+Service Startup  Current   Notes
+docker.dockerd enabled  inactive  -
+```
+* start / stop
+```
+sudo snap start docker
+Started.
+
+sudo snap stop docker
+Stopped.
+```
+
 ## Cheatsheet
 
 __shell__
