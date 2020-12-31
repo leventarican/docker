@@ -22,6 +22,21 @@ sudo snap stop docker
 Stopped.
 ```
 
+## Docker Compose
+* get docker compose
+```
+curl -L "https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)" -o ~/development/docker-compose
+```
+* make it executable
+```
+chmod -x ~/development/docker-compose
+```
+* check 
+```
+./docker-compose -version
+docker-compose version 1.27.4, build 40524192
+```
+
 ## Cheatsheet
 
 __shell__
